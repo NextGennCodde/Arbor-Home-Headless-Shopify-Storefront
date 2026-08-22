@@ -111,7 +111,7 @@ export default function CartModal() {
                 </div>
               ) : (
                 <div className="flex h-full flex-col justify-between overflow-visible">
-                  <ul className="grow overflow-auto py-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                  <ul className="grow overflow-visible py-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                     {cart.lines
                       .sort((a, b) =>
                         a.merchandise.product.title.localeCompare(
