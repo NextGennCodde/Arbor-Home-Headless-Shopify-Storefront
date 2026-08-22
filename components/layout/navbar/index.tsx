@@ -14,7 +14,7 @@ export async function Navbar() {
   return (
     <header 
       className="sticky top-0 z-30 w-full border-b border-[var(--color-border)] nav-blur"
-      style={{ backgroundColor: "color-mix(in srgb, var(--color-surface) 90%, transparent)" }}
+      style={{ backgroundColor: "white" }}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 md:px-6 lg:py-4">
         {/* Mobile hamburger */}
