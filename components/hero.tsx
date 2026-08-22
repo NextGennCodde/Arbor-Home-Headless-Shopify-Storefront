@@ -23,7 +23,7 @@ export function HeroSection() {
 
   return (
     <section className="relative w-full min-h-[100dvh] overflow-hidden bg-[var(--color-forest)]">
-      {/* Background image */}
+      {/* Background image check */}
       <div className="absolute inset-0">
         <Image
           src="/hero-homepage.png"
