@@ -21,11 +21,12 @@ function PathFilterItem({ item }: { item: PathFilterItem }) {
       <DynamicTag
         href={createUrl(item.path, newParams)}
         className={clsx(
-          "w-full rounded-md px-3 py-1.5 text-sm transition-colors duration-150",
+          "w-full   px-3 py-1.5 text-sm transition-colors duration-150",
           {
             "bg-[var(--color-forest)] text-white font-medium": active,
-            "text-[var(--color-ink-muted)] hover:bg-[var(--color-stone-dark)] hover:text-[var(--color-ink)]": !active,
-          }
+            "text-[var(--color-ink-muted)] hover:bg-[var(--color-stone-dark)] hover:text-[var(--color-ink)]":
+              !active,
+          },
         )}
       >
         {item.title}
@@ -54,11 +55,12 @@ function SortFilterItem({ item }: { item: SortFilterItem }) {
         prefetch={!active ? false : undefined}
         href={href}
         className={clsx(
-          "w-full rounded-md px-3 py-1.5 text-sm transition-colors duration-150",
+          "w-full   px-3 py-1.5 text-sm transition-colors duration-150",
           {
             "bg-[var(--color-forest)] text-white font-medium": active,
-            "text-[var(--color-ink-muted)] hover:bg-[var(--color-stone-dark)] hover:text-[var(--color-ink)]": !active,
-          }
+            "text-[var(--color-ink-muted)] hover:bg-[var(--color-stone-dark)] hover:text-[var(--color-ink)]":
+              !active,
+          },
         )}
       >
         {item.title}
