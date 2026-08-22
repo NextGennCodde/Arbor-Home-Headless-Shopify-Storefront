@@ -16,7 +16,7 @@ export function HeroSection() {
       transition: {
         duration: 0.7,
         delay: reduce ? 0 : i * 0.12,
-        ease: [0.16, 1, 0.3, 1],
+        ease: [0.16, 1, 0.3, 1] as const,
       },
     }),
   };
