@@ -20,20 +20,25 @@ export function GridTileImage({
   return (
     <div
       className={clsx(
-        "group flex h-full w-full items-center justify-center overflow-hidden bg-white]",
+        "group flex h-full w-full items-center justify-center overflow-hidden bg-[var(--color-stone)]",
         {
-          relative: label,
+          relative: label || props.fill,
           "ring-2 ring-[var(--color-amber)] ring-offset-2": active,
-          " ": !active,
+          "rounded-lg": !active,
         },
       )}
     >
       {props.src ? (
         <Image
-          className={clsx("absolute top-0 h-fit w-full object-contain", {
-            "transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]":
-              isInteractive,
-          })}
+          className={clsx(
+            props.fill
+              ? "absolute inset-0 object-contain"
+              : "h-auto w-full object-contain",
+            {
+              "transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]":
+                isInteractive,
+            },
+          )}
           {...props}
         />
       ) : null}
