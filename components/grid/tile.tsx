@@ -20,7 +20,7 @@ export function GridTileImage({
   return (
     <div
       className={clsx(
-        "group flex h-full w-full items-center justify-center overflow-hidden bg-[var(--color-stone)]",
+        "group flex h-full w-full items-center justify-center overflow-hidden bg-white",
         {
           relative: label || props.fill,
           "ring-2 ring-[var(--color-amber)] ring-offset-2": active,
