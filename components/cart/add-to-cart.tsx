@@ -61,7 +61,7 @@ function SubmitButton({
         "bg-[var(--color-forest)] text-white hover:bg-[var(--color-forest-light)]",
       )}
     >
-      <div className="absolute left-4">
+      <div>
         <Plus size={18} weight="bold" />
       </div>
       Add to Cart
