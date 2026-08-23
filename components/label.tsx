@@ -21,7 +21,7 @@ const Label = ({
         },
       )}
     >
-      <div className="flex flex-col items-center border border-white/10 bg-[var(--color-forest)]/90 py-[5px] px-0 pr-1.5 pl-3.5 text-xs font-medium text-white backdrop-blur-md w-full justify-between text-center gap-[5px] sm:flex-row sm:items-center sm:p-1.5 sm:pr-1.5 sm:pl-3.5 sm:text-left sm:justify-between sm:gap-0">
+      <div className="flex flex-col items-center border border-white/10 bg-[var(--color-forest)]/90 py-[5px] px-0 pr-1.5 pl-1.5 text-xs font-medium text-white backdrop-blur-md w-full justify-between text-center gap-[5px] sm:flex-row sm:items-center sm:p-1.5 sm:pr-1.5 sm:pl-3.5 sm:text-left sm:justify-between sm:gap-0">
         <h3 className="line-clamp-2 mr-0 sm:mr-4 leading-normal tracking-wide text-white min-w-0">
           {title}
         </h3>
