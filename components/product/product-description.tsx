@@ -11,7 +11,7 @@ export function ProductDescription({ product }: { product: Product }) {
       {/* Title */}
       <div>
         <p className="mb-2 text-[11px] font-medium tracking-[0.2em] uppercase text-[#B3966D]">
-          {product.vendor || "Artisanal Object"}
+          Artisanal Object
         </p>
         <h1 className="font-serif text-3xl font-normal leading-tight text-[#1C1917] md:text-4xl">
           {product.title}
