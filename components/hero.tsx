@@ -1,6 +1,5 @@
 "use client";
 
-import { ArrowRight } from "@phosphor-icons/react";
 import { motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,108 +8,72 @@ export function HeroSection() {
   const reduce = useReducedMotion();
 
   const variants = {
-    hidden: { opacity: 0, y: 32 },
+    hidden: { opacity: 0, y: 24 },
     visible: (i: number) => ({
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.7,
-        delay: reduce ? 0 : i * 0.12,
+        duration: 0.8,
+        delay: reduce ? 0 : i * 0.15,
         ease: [0.16, 1, 0.3, 1] as const,
       },
     }),
   };
 
   return (
-    <section className="relative w-full min-h-[100dvh] overflow-hidden bg-[var(--color-forest)]">
+    <section className="relative w-full h-[100dvh] min-h-[680px] overflow-hidden bg-[#1C1917]">
       {/* Background image */}
       <div className="absolute inset-0">
         <Image
           src="/hero-homepage.png"
-          alt="Curated lifestyle collection"
+          alt="Arbor Home - Artisanal objects for the curated life"
           fill
           priority
-          className="object-cover opacity-60"
+          className="object-cover object-center opacity-85"
           sizes="100vw"
         />
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-forest)]/80 via-[var(--color-forest)]/40 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-forest)]/60 via-transparent to-transparent" />
+        {/* Subtle dark overlay for readability */}
+        <div className="absolute inset-0 bg-black/25" />
       </div>
 
-      {/* Hero content */}
-      <div className="relative z-10 flex min-h-[100dvh] flex-col justify-end pb-16 md:justify-center md:pb-0">
-        <div className="mx-0 max-w-7xl px-4 md:px-6 lg:px-8">
-          <div className="max-w-xl">
-            <motion.p
-              custom={0}
-              initial={reduce ? false : "hidden"}
-              animate="visible"
-              variants={variants}
-              className="mb-4 text-[11px] font-medium tracking-[0.28em] text-[var(--color-amber)] uppercase"
-            >
-              New Collection
-            </motion.p>
+      {/* Hero content centered */}
+      <div className="relative z-10 flex h-full w-full flex-col items-center justify-center px-4 text-center">
+        <div className="max-w-3xl pt-16">
+          <motion.h1
+            custom={0}
+            initial={reduce ? false : "hidden"}
+            animate="visible"
+            variants={variants}
+            className="font-serif text-5xl font-light tracking-tight text-white sm:text-7xl md:text-8xl drop-shadow-lg"
+          >
+            Arbor Home
+          </motion.h1>
 
-            <motion.h1
-              custom={1}
-              initial={reduce ? false : "hidden"}
-              animate="visible"
-              variants={variants}
-              className="mb-5 text-4xl font-semibold leading-[1.1] tracking-tight text-white md:text-5xl lg:text-6xl"
-            >
-              Curated for
-              <br />
-              <span className="italic font-light text-[var(--color-amber-light)]">
-                considered living
-              </span>
-            </motion.h1>
+          <motion.p
+            custom={1}
+            initial={reduce ? false : "hidden"}
+            animate="visible"
+            variants={variants}
+            className="mt-4 font-serif italic text-xl text-white/90 sm:text-2xl md:text-3xl font-light tracking-wide drop-shadow"
+          >
+            Artisanal objects for the curated life.
+          </motion.p>
 
-            <motion.p
-              custom={2}
-              initial={reduce ? false : "hidden"}
-              animate="visible"
-              variants={variants}
-              className="mb-8 max-w-sm text-base leading-relaxed text-white/75"
+          <motion.div
+            custom={2}
+            initial={reduce ? false : "hidden"}
+            animate="visible"
+            variants={variants}
+            className="mt-8 flex justify-center"
+          >
+            <Link
+              href="/search"
+              className="inline-block bg-[#FAF8F5] hover:bg-white text-[#524436] px-8 py-3.5 text-xs font-medium tracking-[0.2em] uppercase transition-all duration-300 shadow-lg hover:shadow-xl active:scale-[0.98]"
             >
-              Thoughtfully selected goods for the home and life. Explore our
-              latest arrivals.
-            </motion.p>
-
-            <motion.div
-              custom={3}
-              initial={reduce ? false : "hidden"}
-              animate="visible"
-              variants={variants}
-              className="flex flex-wrap items-center gap-4"
-            >
-              <Link
-                href="/search"
-                className="group inline-flex items-center gap-2   bg-[var(--color-amber)] px-6 py-3 text-sm font-medium text-white transition-all duration-300 hover:bg-[var(--color-amber-light)] active:scale-[0.98]"
-              >
-                Shop Now
-                <ArrowRight
-                  size={16}
-                  className="transition-transform duration-200 group-hover:translate-x-1"
-                />
-              </Link>
-              <Link
-                href="/search"
-                className="inline-flex items-center gap-2 text-sm font-medium text-white/80 transition-colors duration-200 hover:text-white underline underline-offset-4 decoration-white/40 hover:decoration-white"
-              >
-                View all products
-              </Link>
-            </motion.div>
-          </div>
+              SHOP THE COLLECTION
+            </Link>
+          </motion.div>
         </div>
-      </div>
-
-      {/* Bottom scroll indicator */}
-      <div className="absolute bottom-6 right-6 hidden md:flex items-center gap-2 text-white/40">
-        <div className="h-px w-8 bg-white/30" />
-        <span className="text-[10px] tracking-[0.2em] uppercase font-medium">
-          Scroll
-        </span>
       </div>
     </section>
   );

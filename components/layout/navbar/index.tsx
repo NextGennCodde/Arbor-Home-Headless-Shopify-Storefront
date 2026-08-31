@@ -6,17 +6,24 @@ import { Suspense } from "react";
 import MobileMenu from "./mobile-menu";
 import Search, { SearchSkeleton } from "./search";
 
-const { SITE_NAME } = process.env;
-
 export async function Navbar() {
   const menu = await getMenu("main-menu");
 
+  const defaultNavLinks = [
+    { title: "COLLECTIONS", path: "/search" },
+    { title: "NEW ARRIVALS", path: "/search?sort=latest-desc" },
+    { title: "BESTSELLERS", path: "/search?sort=trending-desc" },
+    { title: "ABOUT", path: "/search" },
+    { title: "JOURNAL", path: "/search" },
+  ];
+
+  const navItems = menu.length > 0
+    ? menu.map((m) => ({ title: m.title.toUpperCase(), path: m.path }))
+    : defaultNavLinks;
+
   return (
-    <header 
-      className="sticky top-0 z-30 w-full border-b border-[var(--color-border)] nav-blur"
-      style={{ backgroundColor: "white" }}
-    >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 md:px-6 lg:py-4">
+    <header className="fixed top-4 left-0 right-0 z-50 mx-auto max-w-7xl px-4 md:px-8 pointer-events-none">
+      <nav className="pointer-events-auto flex items-center justify-between gap-4 px-6 py-3.5 rounded-2xl border border-white/30 bg-black/20 backdrop-blur-xl text-white shadow-2xl transition-all duration-300">
         {/* Mobile hamburger */}
         <div className="flex items-center md:hidden">
           <Suspense fallback={null}>
@@ -24,60 +31,33 @@ export async function Navbar() {
           </Suspense>
         </div>
 
-        {/* Logo */}
+        {/* Logo - Arbor Home Serif */}
         <div className="flex flex-1 items-center md:flex-none">
           <Link
             href="/"
             prefetch={true}
             className="flex items-center gap-2 group"
           >
-            {/* Wordmark */}
-            <div className="flex flex-col leading-none">
-              <span className="text-[10px] font-medium tracking-[0.22em] text-[var(--color-amber)] uppercase">
-                {SITE_NAME?.split(" ").slice(0, -1).join(" ") || "Shopiify"}
-              </span>
-              <span className="text-[15px] font-semibold tracking-[0.08em] text-[var(--color-forest)] uppercase">
-                {SITE_NAME?.split(" ").slice(-1)[0] || "Store"}
-              </span>
-            </div>
+            <span className="font-serif text-2xl font-light tracking-normal text-white drop-shadow-md transition-opacity group-hover:opacity-90">
+              Arbor Home
+            </span>
           </Link>
         </div>
 
         {/* Desktop nav links */}
-        {menu.length > 0 ? (
-          <ul className="hidden items-center gap-6 md:flex">
-            {menu.map((item: Menu) => (
-              <li key={item.title}>
-                <Link
-                  href={item.path}
-                  prefetch={true}
-                  className="link-underline text-sm font-medium tracking-wide text-[var(--color-ink-muted)] transition-colors duration-200 hover:text-[var(--color-ink)]"
-                >
-                  {item.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <ul className="hidden items-center gap-6 md:flex">
-            <li>
+        <ul className="hidden items-center gap-6 lg:gap-8 md:flex text-[11px] font-medium tracking-[0.2em] uppercase text-white/90">
+          {navItems.map((item) => (
+            <li key={item.title}>
               <Link
-                href="/search"
-                className="link-underline text-sm font-medium tracking-wide text-[var(--color-ink-muted)] transition-colors duration-200 hover:text-[var(--color-ink)]"
+                href={item.path}
+                prefetch={true}
+                className="transition-colors duration-200 hover:text-white text-white/80"
               >
-                All Products
+                {item.title}
               </Link>
             </li>
-            <li>
-              <Link
-                href="/search?sort=price-asc"
-                className="link-underline text-sm font-medium tracking-wide text-[var(--color-ink-muted)] transition-colors duration-200 hover:text-[var(--color-ink)]"
-              >
-                Best Sellers
-              </Link>
-            </li>
-          </ul>
-        )}
+          ))}
+        </ul>
 
         {/* Right: search + cart */}
         <div className="flex items-center gap-3">

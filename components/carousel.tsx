@@ -1,6 +1,6 @@
 import { getCollectionProducts, getProducts } from "lib/shopify";
+import Image from "next/image";
 import Link from "next/link";
-import { GridTileImage } from "./grid/tile";
 
 export async function Carousel() {
   let products = await getCollectionProducts({
@@ -13,50 +13,62 @@ export async function Carousel() {
 
   if (!products?.length) return null;
 
-  // Triple-up products so carousel loops on wide screens
+  // Triple-up products so carousel loops smoothly
   const carouselProducts = [...products, ...products, ...products];
 
   return (
-    <section className="bg-[var(--color-stone)] py-10 md:py-16">
-      <div className="mx-auto max-w-7xl px-4 md:px-6">
-        <div className="mb-8">
-          <h2 className="text-2xl font-semibold tracking-tight text-[var(--color-ink)] md:text-3xl">
-            The Collection
-          </h2>
-          <p className="mt-1 text-sm text-[var(--color-ink-muted)]">
-            Scroll to explore everything we carry
-          </p>
-        </div>
+    <section className="bg-[var(--color-surface)] border-t border-[var(--color-border)] py-16 md:py-24">
+      <div className="mx-auto max-w-7xl px-4 md:px-8 mb-10 text-center">
+        <h2 className="font-serif text-3xl font-normal text-[#1C1917] sm:text-4xl md:text-5xl">
+          More From The Collection
+        </h2>
+        <p className="mt-2 text-xs font-medium tracking-[0.15em] text-[#4A4742] uppercase">
+          Curated objects for every corner of your home
+        </p>
       </div>
 
-      <div className="w-full overflow-x-auto pb-2 pt-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        <ul className="flex animate-carousel gap-3 px-4 md:px-6">
-          {carouselProducts.map((product, i) => (
-            <li
-              key={`${product.handle}${i}`}
-              className="relative aspect-[3/4] h-[40vh] max-h-[340px] w-48 flex-none   overflow-hidden md:w-56 lg:h-[45vh]"
-            >
-              <Link
-                href={`/product/${product.handle}`}
-                className="relative block h-full w-full"
-                prefetch={true}
-                tabIndex={i >= products.length * 2 ? -1 : undefined}
+      <div className="w-full overflow-x-auto pb-4 pt-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <ul className="flex animate-carousel gap-6 px-4 md:px-8">
+          {carouselProducts.map((product, i) => {
+            const priceAmount = parseFloat(product.priceRange.maxVariantPrice.amount).toLocaleString('en-US', {
+              style: 'currency',
+              currency: product.priceRange.maxVariantPrice.currencyCode || 'USD',
+              maximumFractionDigits: 0,
+            });
+
+            return (
+              <li
+                key={`${product.handle}${i}`}
+                className="group relative flex-none w-56 sm:w-64"
               >
-                <GridTileImage
-                  alt={product.title}
-                  label={{
-                    title: product.title,
-                    amount: product.priceRange.maxVariantPrice.amount,
-                    currencyCode:
-                      product.priceRange.maxVariantPrice.currencyCode,
-                  }}
-                  src={product.featuredImage?.url}
-                  fill
-                  sizes="(min-width: 1024px) 15vw, (min-width: 768px) 22vw, 48vw"
-                />
-              </Link>
-            </li>
-          ))}
+                <Link
+                  href={`/product/${product.handle}`}
+                  prefetch={true}
+                  className="block w-full"
+                >
+                  <div className="relative aspect-[1/1] w-full overflow-hidden bg-[#EAE7E1]">
+                    {product.featuredImage?.url ? (
+                      <Image
+                        src={product.featuredImage.url}
+                        alt={product.title}
+                        fill
+                        sizes="(min-width: 1024px) 20vw, 50vw"
+                        className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                      />
+                    ) : null}
+                  </div>
+                  <div className="pt-3">
+                    <p className="text-xs font-medium tracking-[0.1em] text-[#1C1917] uppercase truncate">
+                      {product.title}
+                    </p>
+                    <p className="text-xs text-[#B3966D] font-medium mt-0.5">
+                      {priceAmount}
+                    </p>
+                  </div>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </section>

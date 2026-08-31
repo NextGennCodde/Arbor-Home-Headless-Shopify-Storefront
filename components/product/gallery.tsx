@@ -1,7 +1,6 @@
 "use client";
 
 import { ArrowLeft, ArrowRight } from "@phosphor-icons/react";
-import { GridTileImage } from "components/grid/tile";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -27,12 +26,12 @@ export function Gallery({
     imageIndex === 0 ? images.length - 1 : imageIndex - 1;
 
   return (
-    <form>
-      {/* Main image */}
-      <div className="relative aspect-square h-full max-h-[600px] w-full overflow-hidden   bg-[var(--color-stone)]">
+    <form className="flex flex-col gap-3">
+      {/* Main image — 4:5 portrait ratio matching arbor-home.png */}
+      <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#EAE7E1]">
         {images[imageIndex] && (
           <Image
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover object-center"
             fill
             sizes="(min-width: 1024px) 55vw, 100vw"
             alt={images[imageIndex]?.altText as string}
@@ -41,53 +40,56 @@ export function Gallery({
           />
         )}
 
-        {/* Nav arrows */}
+        {/* Nav arrows — minimal cream style */}
         {images.length > 1 && (
           <div className="absolute bottom-4 right-4 flex items-center gap-2">
             <button
               formAction={() => updateImage(previousImageIndex.toString())}
               aria-label="Previous product image"
-              className="flex h-9 w-9 items-center justify-center   bg-white/85 text-[var(--color-ink)] shadow-sm backdrop-blur-sm transition-all hover:bg-white hover:shadow-md active:scale-95"
+              className="flex h-9 w-9 items-center justify-center bg-white/90 text-[#1C1917] shadow-sm backdrop-blur-sm transition-all hover:bg-white hover:shadow-md active:scale-95"
             >
-              <ArrowLeft size={16} weight="bold" />
+              <ArrowLeft size={15} weight="bold" />
             </button>
             <button
               formAction={() => updateImage(nextImageIndex.toString())}
               aria-label="Next product image"
-              className="flex h-9 w-9 items-center justify-center   bg-white/85 text-[var(--color-ink)] shadow-sm backdrop-blur-sm transition-all hover:bg-white hover:shadow-md active:scale-95"
+              className="flex h-9 w-9 items-center justify-center bg-white/90 text-[#1C1917] shadow-sm backdrop-blur-sm transition-all hover:bg-white hover:shadow-md active:scale-95"
             >
-              <ArrowRight size={16} weight="bold" />
+              <ArrowRight size={15} weight="bold" />
             </button>
           </div>
         )}
 
         {/* Image counter */}
         {images.length > 1 && (
-          <div className="absolute bottom-4 left-4   bg-[var(--color-forest)]/70 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
+          <div className="absolute bottom-4 left-4 bg-white/80 px-3 py-1 text-[10px] font-medium tracking-widest uppercase text-[#1C1917] backdrop-blur-sm">
             {imageIndex + 1} / {images.length}
           </div>
         )}
       </div>
 
-      {/* Thumbnails */}
+      {/* Thumbnails — square tight row */}
       {images.length > 1 && (
-        <ul className="mt-4 flex flex-wrap items-center gap-2">
+        <ul className="flex flex-wrap items-center gap-2">
           {images.map((image, index) => {
             const isActive = index === imageIndex;
             return (
-              <li key={image.src} className="h-16 w-16 flex-none">
+              <li key={image.src} className="h-[72px] w-[72px] flex-none">
                 <button
                   formAction={() => updateImage(index.toString())}
                   aria-label={`Select image ${index + 1}`}
-                  className="h-full w-full overflow-hidden  "
+                  className={`relative h-full w-full overflow-hidden block transition-all duration-200 ${
+                    isActive
+                      ? "ring-1 ring-[#1C1917] ring-offset-1"
+                      : "ring-1 ring-transparent hover:ring-[#B3966D] hover:ring-offset-1"
+                  }`}
                 >
-                  <GridTileImage
-                    alt={image.altText}
+                  <Image
                     src={image.src}
-                    width={64}
-                    height={64}
-                    active={isActive}
-                    isInteractive={false}
+                    alt={image.altText || ""}
+                    fill
+                    sizes="72px"
+                    className="object-cover object-center"
                   />
                 </button>
               </li>

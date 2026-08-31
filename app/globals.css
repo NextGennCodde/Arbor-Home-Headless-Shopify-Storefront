@@ -8,17 +8,18 @@
   :root {
     --color-forest: #1a2e1e;
     --color-forest-light: #2d4a32;
-    --color-stone: #f5f2ed;
-    --color-stone-dark: #e8e3da;
-    --color-amber: #c8923e;
-    --color-amber-light: #e4ab60;
-    --color-ink: #1c1f21;
-    --color-ink-muted: #4a4e52;
-    --color-ink-faint: #8a8e92;
-    --color-surface: #faf9f6;
-    --color-border: #dedad3;
+    --color-stone: #efece6;
+    --color-stone-dark: #e4dfd8;
+    --color-amber: #b3966d;
+    --color-amber-light: #d4c5a9;
+    --color-ink: #1c1917;
+    --color-ink-muted: #4a4742;
+    --color-ink-faint: #8a8782;
+    --color-surface: #f5f3ee;
+    --color-border: #e2ded8;
 
-    --font-sans: var(--font-geist-sans), "Outfit", "Cabinet Grotesk", system-ui, sans-serif;
+    --font-sans: var(--font-sans), "Plus Jakarta Sans", system-ui, sans-serif;
+    --font-serif: var(--font-serif), "Cormorant Garamond", Georgia, serif;
     --font-mono: var(--font-geist-mono), "JetBrains Mono", monospace;
 
     --radius-sm: 4px;

@@ -6,21 +6,27 @@ import { VariantSelector } from "./variant-selector";
 
 export function ProductDescription({ product }: { product: Product }) {
   return (
-    <div className="flex flex-col gap-6">
-      {/* Title + price */}
-      <div className="border-b border-[var(--color-border)] pb-6">
-        <h1 className="mb-3 text-2xl font-semibold leading-tight tracking-tight text-[var(--color-ink)] md:text-3xl">
+    <div className="flex flex-col gap-8">
+
+      {/* Title */}
+      <div>
+        <p className="mb-2 text-[11px] font-medium tracking-[0.2em] uppercase text-[#B3966D]">
+          {product.vendor || "Artisanal Object"}
+        </p>
+        <h1 className="font-serif text-3xl font-normal leading-tight text-[#1C1917] md:text-4xl">
           {product.title}
         </h1>
-        <div className="inline-flex items-center   bg-[var(--color-forest)] px-4 py-1.5">
-          <Price
-            className="text-sm font-medium text-white"
-            amount={product.priceRange.maxVariantPrice.amount}
-            currencyCode={product.priceRange.maxVariantPrice.currencyCode}
-          />
-        </div>
+      </div>
+
+      {/* Price */}
+      <div className="flex items-center gap-4 border-b border-[var(--color-border)] pb-8">
+        <Price
+          className="font-serif text-2xl font-normal text-[#1C1917]"
+          amount={product.priceRange.maxVariantPrice.amount}
+          currencyCode={product.priceRange.maxVariantPrice.currencyCode}
+        />
         {!product.availableForSale && (
-          <span className="ml-3 inline-flex items-center   border border-red-200 bg-red-50 px-3 py-1 text-xs font-medium text-red-600">
+          <span className="inline-flex items-center border border-red-200 bg-red-50 px-3 py-1 text-xs font-medium tracking-wide text-red-600 uppercase">
             Out of Stock
           </span>
         )}
@@ -31,28 +37,31 @@ export function ProductDescription({ product }: { product: Product }) {
 
       {/* Description */}
       {product.descriptionHtml ? (
-        <div className="border-b border-[var(--color-border)] pb-6">
+        <div className="border-b border-[var(--color-border)] pb-8">
           <Prose
-            className="text-sm leading-relaxed text-[var(--color-ink-muted)]"
+            className="text-sm leading-relaxed text-[#4A4742] prose-p:mb-3"
             html={product.descriptionHtml}
           />
         </div>
       ) : null}
 
-      {/* Add to cart */}
+      {/* Add to Cart */}
       <AddToCart product={product} />
 
       {/* Trust signals */}
       <div className="grid grid-cols-2 gap-3 pt-2">
         {[
-          { label: "Free shipping", sub: "On orders over $75" },
-          { label: "Easy returns", sub: "30-day return policy" },
+          { label: "Free Delivery", sub: "On orders over £75" },
+          { label: "Easy Returns", sub: "30-day return policy" },
         ].map((item) => (
-          <div key={item.label} className="  bg-[var(--color-stone)] px-3 py-3">
-            <p className="text-xs font-semibold text-[var(--color-ink)]">
+          <div
+            key={item.label}
+            className="border border-[var(--color-border)] bg-[var(--color-stone)] px-4 py-3"
+          >
+            <p className="text-xs font-semibold tracking-wide text-[#1C1917] uppercase">
               {item.label}
             </p>
-            <p className="text-xs text-[var(--color-ink-faint)]">{item.sub}</p>
+            <p className="mt-0.5 text-xs text-[#8A8782]">{item.sub}</p>
           </div>
         ))}
       </div>

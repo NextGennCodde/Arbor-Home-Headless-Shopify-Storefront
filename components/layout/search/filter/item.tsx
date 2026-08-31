@@ -17,14 +17,14 @@ function PathFilterItem({ item }: { item: PathFilterItem }) {
   newParams.delete("q");
 
   return (
-    <li className="mt-2 flex" key={item.title}>
+    <li className="mt-1 flex" key={item.title}>
       <DynamicTag
         href={createUrl(item.path, newParams)}
         className={clsx(
-          "w-full   px-3 py-1.5 text-sm transition-colors duration-150",
+          "w-full px-2.5 py-1.5 text-[11px] font-medium tracking-[0.1em] uppercase transition-all duration-200",
           {
-            "bg-[var(--color-forest)] text-white font-medium": active,
-            "text-[var(--color-ink-muted)] hover:bg-[var(--color-stone-dark)] hover:text-[var(--color-ink)]":
+            "bg-[#1C1917] text-white": active,
+            "text-[#4A4742] hover:bg-[#EAE7E1] hover:text-[#1C1917]":
               !active,
           },
         )}
@@ -50,15 +50,15 @@ function SortFilterItem({ item }: { item: SortFilterItem }) {
   const DynamicTag = active ? "p" : Link;
 
   return (
-    <li className="mt-2 flex text-sm" key={item.title}>
+    <li className="mt-1 flex" key={item.title}>
       <DynamicTag
         prefetch={!active ? false : undefined}
         href={href}
         className={clsx(
-          "w-full   px-3 py-1.5 text-sm transition-colors duration-150",
+          "w-full px-2.5 py-1.5 text-[11px] font-medium tracking-[0.1em] uppercase transition-all duration-200",
           {
-            "bg-[var(--color-forest)] text-white font-medium": active,
-            "text-[var(--color-ink-muted)] hover:bg-[var(--color-stone-dark)] hover:text-[var(--color-ink)]":
+            "bg-[#1C1917] text-white": active,
+            "text-[#4A4742] hover:bg-[#EAE7E1] hover:text-[#1C1917]":
               !active,
           },
         )}

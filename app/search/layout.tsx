@@ -11,29 +11,29 @@ export default function SearchLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <div className="bg-[var(--color-surface)] min-h-screen pt-24 md:pt-28">
       {/* Page header */}
-      <div className="bg-[var(--color-stone)] border-b border-[var(--color-border)]">
-        <div className="mx-auto max-w-7xl px-4 py-10 md:px-6 md:py-14">
-          <h1 className="text-3xl font-semibold tracking-tight text-[var(--color-ink)] md:text-4xl">
-            Shop All
+      <div className="border-b border-[var(--color-border)] py-10 md:py-14 text-center bg-[var(--color-surface)]">
+        <div className="mx-auto max-w-7xl px-4 md:px-8">
+          <h1 className="font-serif text-4xl font-normal text-[#1C1917] sm:text-5xl md:text-6xl">
+            Curated Collection
           </h1>
-          <p className="mt-2 text-sm text-[var(--color-ink-muted)]">
-            Browse our complete collection
+          <p className="mt-2 text-xs font-medium tracking-[0.18em] text-[#4A4742] uppercase">
+            Artisanal objects thoughtfully crafted for considered living
           </p>
         </div>
       </div>
 
       <div className="bg-[var(--color-surface)]">
-        <div className="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-8 md:flex-row md:px-6">
+        <div className="mx-auto flex max-w-7xl flex-col gap-10 px-4 py-12 md:flex-row md:px-8">
           {/* Collections sidebar */}
-          <div className="w-full flex-none md:max-w-[160px]">
-            <div className="sticky top-24">
+          <div className="w-full flex-none md:max-w-[180px]">
+            <div className="sticky top-28">
               <Collections />
             </div>
           </div>
 
-          {/* Products */}
+          {/* Products Catalog */}
           <div className="min-h-screen w-full">
             <Suspense fallback={null}>
               <ChildrenWrapper>{children}</ChildrenWrapper>
@@ -41,8 +41,8 @@ export default function SearchLayout({
           </div>
 
           {/* Sort sidebar */}
-          <div className="flex-none md:w-[160px]">
-            <div className="sticky top-24">
+          <div className="flex-none md:w-[180px]">
+            <div className="sticky top-28">
               <FilterList list={sorting} title="Sort by" />
             </div>
           </div>
@@ -50,6 +50,6 @@ export default function SearchLayout({
       </div>
 
       <Footer />
-    </>
+    </div>
   );
 }
